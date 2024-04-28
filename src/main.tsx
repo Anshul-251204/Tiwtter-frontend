@@ -52,6 +52,7 @@ export const router = createBrowserRouter([
 				path: "/single-post/:id",
 				element: <SinglePost />,
 			},
+		
 		],
 	},
 	{

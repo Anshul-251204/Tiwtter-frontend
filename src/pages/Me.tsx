@@ -6,15 +6,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "@/recoil/atoms/userAtom";
+import { BadgeCheck } from "lucide-react";
 
 function Profile() {
 
 	const navigate = useNavigate();
 
 	const user = useRecoilValue(userAtom);
-	// if(user){
-	// 	navigate("/")
-	// };
+
 	console.log(user);
 	
 
@@ -55,14 +54,24 @@ function Profile() {
 						<div className="w-full flex justify-between ">
 							<div>
 								<h1>{profile?.name} </h1>
-								<h1>@{profile?.username}</h1>
-								<h1 className=" text-gray-400 my-2 ">
+								<h1 className={`${user.blueTick ? "text-blue-400" : null} flex gap-2 items-center`}>
+									@{profile?.username}{" "}
+									{user.blueTick &&
+										<BadgeCheck
+											// color="#0000FF"
+											size={"1.2rem"}
+										/>
+									}
+								</h1>
+								<h1 className="  text-gray-400 my-2 ">
 									Join At {joinedDate.join(" ")}
 								</h1>
 							</div>
 
 							<div>
-								<Button onClick={redirectToEditPage}>Edit</Button>
+								<Button onClick={redirectToEditPage}>
+									Edit
+								</Button>
 							</div>
 						</div>
 
