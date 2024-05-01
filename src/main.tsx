@@ -15,6 +15,7 @@ import Me from "./pages/Me.tsx";
 import ProfileEdit from "./pages/ProfileEdit.tsx";
 import AddPostHome from "./pages/addPost.tsx";
 import SinglePost from "./pages/SinglePost.tsx";
+import ChangeProfilePic from "./pages/ChangeProfilePic.tsx";
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -52,7 +53,10 @@ export const router = createBrowserRouter([
 				path: "/single-post/:id",
 				element: <SinglePost />,
 			},
-		
+			{
+				path: "//change-profile-pic",
+				element: <ChangeProfilePic />,
+			},
 		],
 	},
 	{

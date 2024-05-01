@@ -9,19 +9,16 @@ import { userAtom } from "@/recoil/atoms/userAtom";
 import { BadgeCheck } from "lucide-react";
 
 function Profile() {
-
 	const navigate = useNavigate();
 
 	const user = useRecoilValue(userAtom);
 
 	console.log(user);
-	
-
 
 	const redirectToEditPage = () => {
 		navigate("/profile-edit");
 	};
-	
+
 	const [profile, setProfile] = useState<ProfileType>();
 	let joinedDate: any = new Date(profile?.createdAt as any);
 
@@ -45,7 +42,11 @@ function Profile() {
 					/>
 					<img
 						className=" absolute top-[55%] sm:top-[45%]  left-[5%] sm:h-[150px] h-[120px] sm:w-[150px] w-[120px] object-cover rounded-full "
-						src="https://images.unsplash.com/photo-1712242467502-678b72cc8b5b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8"
+						src={
+							user.avatar.url
+								? user.avatar.url
+								: "https://images.unsplash.com/photo-1712135596173-2bb522bcfd88?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
+						}
 						alt=""
 					/>
 				</div>
@@ -54,14 +55,18 @@ function Profile() {
 						<div className="w-full flex justify-between ">
 							<div>
 								<h1>{profile?.name} </h1>
-								<h1 className={`${user.blueTick ? "text-blue-400" : null} flex gap-2 items-center`}>
+								<h1
+									className={`${
+										user.blueTick ? "text-blue-400" : null
+									} flex gap-2 items-center`}
+								>
 									@{profile?.username}{" "}
-									{user.blueTick &&
+									{user.blueTick && (
 										<BadgeCheck
 											// color="#0000FF"
 											size={"1.2rem"}
 										/>
-									}
+									)}
 								</h1>
 								<h1 className="  text-gray-400 my-2 ">
 									Join At {joinedDate.join(" ")}

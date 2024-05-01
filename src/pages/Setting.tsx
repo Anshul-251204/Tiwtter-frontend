@@ -1,15 +1,16 @@
 import axios from "axios";
-import { LogOutIcon } from "lucide-react";
+import { CircleX, Cross, LogOutIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "@/recoil/atoms/userAtom";
-
+import DeleteAccountPopUp from "@/components/custom/popup/DeleteAccountPopUp";
 export default function Setting() {
 	const navigate = useNavigate();
 	const user = useRecoilValue(userAtom);
+	const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
 	const logoutUser = async () => {
 		try {
@@ -29,16 +30,20 @@ export default function Setting() {
 
 	const makePayment = async () => {
 		const stripe = await loadStripe(
-			"pk_test_51Orf6TSG6eGnrw34zshMSVO0UUmNVUXIlogObxaG5DqS8ur0OsH9CbSO6AcEnM22vhtk1S9Hi2TFNXVpAIPWXfgl00JFqaa7hF"
+			"pk_test_51Orf6TSG6eGnrw34EsEi82C3S81UtXamezKRqg5PoHqQcHWjfhIKUjKJkqF5nFQshDpNdldsgnr3YjjPppCPEixT00uEUIAZmr     "
 		);
 
 		const payment = {
 			price: 10,
+			name: "Twitter Premium",
+			image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Eo_circle_light-blue_checkmark.svg/1024px-Eo_circle_light-blue_checkmark.svg.png",
+			user_id: user.id,
 		};
 
 		const res = await axios.post(
 			`/api/v1/payments/`,
 			{ payment },
+
 			{ withCredentials: true }
 		);
 
@@ -46,24 +51,25 @@ export default function Setting() {
 
 		const session = await res.data;
 
+		console.log(session);
+
 		const result = await stripe?.redirectToCheckout({
 			sessionId: session.id,
 		});
-		
-		if (result) {
-			axios
-				.patch(`/api/v1/payments/bluetick/${user.username}`)
-				.then((data) => console.log(data.data.data));
-		}
 	};
 
 	return (
-		<div className=" w-full h-full overflow-x-auto p-10 max-sm:p-4 ">
+		<div className=" relative w-full h-full overflow-x-auto p-10 max-sm:p-4 ">
 			<div className="sm:w-[40%] w-full h-full border py-4 rounded-lg ">
 				<button className="w-full hover:bg-secondary text-left p-4">
 					Change Account Details
 				</button>
-				<button className="w-full hover:bg-secondary text-left p-4">
+				<button
+					onClick={() => {
+						navigate("/change-profile-pic");
+					}}
+					className="w-full hover:bg-secondary text-left p-4"
+				>
 					Change Profile
 				</button>
 				<button className="w-full hover:bg-secondary text-left p-4">
@@ -84,10 +90,20 @@ export default function Setting() {
 				>
 					Logout <LogOutIcon size={"1rem"} />
 				</button>
-				<button className="w-full hover:bg-secondary text-left p-4">
+				<button
+					onClick={() => setDeleteModal((prev) => !prev)}
+					className="w-full hover:bg-secondary text-left p-4"
+				>
 					Delete Account
 				</button>
 			</div>
+
+			{deleteModal && (
+				<DeleteAccountPopUp
+					deleteModal={deleteModal}
+					setDeleteModal={setDeleteModal}
+				/>
+			)}
 		</div>
 	);
 }
