@@ -65,3 +65,10 @@ export type CommentType = {
 	};
 	userId: string;
 };
+
+export type PaymentPayLoadType = {
+	price:number,
+	image:string,
+	name:string,
+	userId:string
+}
