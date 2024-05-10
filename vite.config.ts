@@ -6,7 +6,7 @@ export default defineConfig({
 	plugins: [react()],
 	server: {
 		proxy: {
-			"/api": "https://twitter-node-prisma-2.onrender.com/",
+			"/api": "https://twitter-node-prisma-2.onrender.com",
 		},
 	},
 	resolve: {
