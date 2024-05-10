@@ -54,7 +54,7 @@ export default function Setting() {
 
 		console.log(session);
 
-		const result = await stripe?.redirectToCheckout({
+		await stripe?.redirectToCheckout({
 			sessionId: session.id,
 		});
 	};
