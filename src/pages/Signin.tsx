@@ -20,9 +20,13 @@ export default function page() {
 	const signinHandler = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			const res = await axios.post("/api/v1/auth/signin", user, {
-				withCredentials: true,
-			});
+			const res = await axios.post(
+				"https://twitter-node-prisma-2.onrender.com/api/v1/auth/signin",
+				user,
+				{
+					withCredentials: true,
+				}
+			);
 			
 			setUserAtom(res.data.data)
 			localStorage.setItem("curr-user",JSON.stringify(res.data.data));

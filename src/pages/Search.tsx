@@ -24,9 +24,12 @@ export default function Search() {
 	const [users, setUsers] = useState([]);
 
 	const fetchUsers = async () => {
-		const res = await axios.get(`/api/v1/users/search/${username}`, {
-			withCredentials: true,
-		});
+		const res = await axios.get(
+			`https://twitter-node-prisma-2.onrender.com/api/v1/users/search/${username}`,
+			{
+				withCredentials: true,
+			}
+		);
 		if (res.data.data.length == 0) {
 			toast.error("User not Found !");
 		}
@@ -37,9 +40,12 @@ export default function Search() {
 		e: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (e.key == "Enter") {
-			const res = await axios.get(`/api/v1/users/search/${username}`, {
-				withCredentials: true,
-			});
+			const res = await axios.get(
+				`https://twitter-node-prisma-2.onrender.com/api/v1/users/search/${username}`,
+				{
+					withCredentials: true,
+				}
+			);
 
 			if (res.data.data.length == 0) {
 				toast.error("User not Found !");

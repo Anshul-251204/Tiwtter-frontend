@@ -16,7 +16,7 @@ export default function Setting() {
 	const logoutUser = async () => {
 		try {
 			const res = await axios.post(
-				`/api/v1/auth/signout`,
+				`https://twitter-node-prisma-2.onrender.com/api/v1/auth/signout`,
 				{},
 				{ withCredentials: true }
 			);
@@ -42,7 +42,7 @@ export default function Setting() {
 		};
 
 		const res = await axios.post(
-			`/api/v1/payments/`,
+			`https://twitter-node-prisma-2.onrender.com/api/v1/payments/`,
 			{ payment },
 
 			{ withCredentials: true }

@@ -21,9 +21,13 @@ export default function SignUp() {
 	const signInHandler = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			const res = await axios.post("/api/v1/auth/signin", user, {
-				withCredentials: true,
-			});
+			const res = await axios.post(
+				"https://twitter-node-prisma-2.onrender.com/api/v1/auth/signin",
+				user,
+				{
+					withCredentials: true,
+				}
+			);
 
 			toast.success(res.data.message);
 			navigate("/");

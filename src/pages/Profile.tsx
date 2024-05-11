@@ -15,9 +15,14 @@ function Profile() {
 
 	joinedDate.shift();
 	useEffect(() => {
-		axios.get("/api/v1/users/" + username)?.then((response) => {
-			setProfile(response.data.data);
-		});
+		axios
+			.get(
+				"https://twitter-node-prisma-2.onrender.com/api/v1/users/" +
+					username
+			)
+			?.then((response) => {
+				setProfile(response.data.data);
+			});
 	}, [username]);
 	 
 

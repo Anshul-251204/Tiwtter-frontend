@@ -17,12 +17,20 @@ const SinglePost: React.FC = () => {
 	const [refresh, setRefresh] = useState<boolean>(false);
 
 	useEffect(() => {
-		axios.get(`/api/v1/posts/${id}`).then((data) => {
-			setPost(data?.data?.data);
-		});
-		axios.get(`/api/v1/comments/${id}`).then((data) => {
-			setComments(data?.data?.data);
-		});
+		axios
+			.get(
+				`https://twitter-node-prisma-2.onrender.com/api/v1/posts/${id}`
+			)
+			.then((data) => {
+				setPost(data?.data?.data);
+			});
+		axios
+			.get(
+				`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`
+			)
+			.then((data) => {
+				setComments(data?.data?.data);
+			});
 	}, [refresh]);
 
 	const addCommentOnKeyPress = (
@@ -33,13 +41,12 @@ const SinglePost: React.FC = () => {
 		if (e.key == "Enter") {
 			axios
 				.post(
-					`/api/v1/comments/${id}`,
+					`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`,
 					{ content },
 					{ withCredentials: true }
 				)
 				.then((data) => {
-					
-					setRefresh((prev)=>!prev);
+					setRefresh((prev) => !prev);
 					toast.success(data.data.message);
 				})
 				.catch((err) => {
@@ -57,12 +64,11 @@ const SinglePost: React.FC = () => {
 		e.preventDefault()
 		axios
 			.post(
-				`/api/v1/comments/${id}`,
+				`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`,
 				{ content },
 				{ withCredentials: true }
 			)
 			.then((data) => {
-		
 				setRefresh((prev) => !prev);
 				toast.success(data.data.message);
 			})
