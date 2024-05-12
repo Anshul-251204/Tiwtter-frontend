@@ -8,7 +8,7 @@ function Home() {
 	const [posts, setPosts] = useState<PostType[]>([]);
 	useEffect(() => {
 		axios
-			.get("https://twitter-node-prisma-2.onrender.com/api/v1/posts/")
+			.get("/api/v1/posts/")
 			.then((response) => setPosts(response.data.data));
 	}, []);
 	return (

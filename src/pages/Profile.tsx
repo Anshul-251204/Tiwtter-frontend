@@ -15,16 +15,10 @@ function Profile() {
 
 	joinedDate.shift();
 	useEffect(() => {
-		axios
-			.get(
-				"https://twitter-node-prisma-2.onrender.com/api/v1/users/" +
-					username
-			)
-			?.then((response) => {
-				setProfile(response.data.data);
-			});
+		axios.get("/api/v1/users/" + username)?.then((response) => {
+			setProfile(response.data.data);
+		});
 	}, [username]);
-	 
 
 	return (
 		<div className=" w-full h-full sm:w-[70%] overflow-x-auto no-scrollbar ">
@@ -32,12 +26,18 @@ function Profile() {
 				<div className=" relative w-full sm:h-[45%] h-[40%] ">
 					<img
 						className=" w-full h-full object-cover object-center "
-						src="https://images.unsplash.com/photo-1712135596173-2bb522bcfd88?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
+						src={
+							"https://images.unsplash.com/photo-1712135596173-2bb522bcfd88?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
+						}
 						alt=""
 					/>
 					<img
 						className=" absolute top-[55%] sm:top-[45%]  left-[5%] sm:h-[150px] h-[120px] sm:w-[150px] w-[120px] object-cover rounded-full "
-						src="https://images.unsplash.com/photo-1712242467502-678b72cc8b5b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8"
+						src={
+							profile?.avatar?.url
+								? profile.avatar.url
+								: "https://images.unsplash.com/photo-1712242467502-678b72cc8b5b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8"
+						}
 						alt=""
 					/>
 				</div>
@@ -71,7 +71,7 @@ function Profile() {
 			</div>
 
 			<div>
-				{profile?.posts?.length==0 && (
+				{profile?.posts?.length == 0 && (
 					<div className=" h-full w-full flex my-20 text-2xl justify-center items-center">
 						NO POST 🥲
 					</div>

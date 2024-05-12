@@ -19,14 +19,14 @@ const SinglePost: React.FC = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://twitter-node-prisma-2.onrender.com/api/v1/posts/${id}`
+				`/api/v1/posts/${id}`
 			)
 			.then((data) => {
 				setPost(data?.data?.data);
 			});
 		axios
 			.get(
-				`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`
+				`/api/v1/comments/${id}`
 			)
 			.then((data) => {
 				setComments(data?.data?.data);
@@ -41,7 +41,7 @@ const SinglePost: React.FC = () => {
 		if (e.key == "Enter") {
 			axios
 				.post(
-					`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`,
+					`/api/v1/comments/${id}`,
 					{ content },
 					{ withCredentials: true }
 				)
@@ -64,7 +64,7 @@ const SinglePost: React.FC = () => {
 		e.preventDefault()
 		axios
 			.post(
-				`https://twitter-node-prisma-2.onrender.com/api/v1/comments/${id}`,
+				`/api/v1/comments/${id}`,
 				{ content },
 				{ withCredentials: true }
 			)

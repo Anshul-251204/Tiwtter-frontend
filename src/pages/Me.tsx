@@ -26,11 +26,7 @@ function Profile() {
 
 	joinedDate.shift();
 	useEffect(() => {
-		axios
-			.get(
-				"https://twitter-node-prisma-2.onrender.com/api/v1/users/" +
-					user.username
-			)
+		axios.get(`/api/v1/users/${user.username}`)
 			.then((response) => {
 				setProfile(response.data.data);
 			});

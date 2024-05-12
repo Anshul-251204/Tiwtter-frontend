@@ -22,7 +22,7 @@ export default function SignUp() {
 		e.preventDefault();
 		try {
 			const res = await axios.post(
-				"https://twitter-node-prisma-2.onrender.com/api/v1/auth/signin",
+				"/api/v1/auth/signin",
 				user,
 				{
 					withCredentials: true,
