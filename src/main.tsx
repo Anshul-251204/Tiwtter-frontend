@@ -16,6 +16,7 @@ import ProfileEdit from "./pages/ProfileEdit.tsx";
 import AddPostHome from "./pages/addPost.tsx";
 import SinglePost from "./pages/SinglePost.tsx";
 import ChangeProfilePic from "./pages/ChangeProfilePic.tsx";
+import ChangePassword from "./pages/sub-page/ChangePassword.tsx";
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -54,9 +55,13 @@ export const router = createBrowserRouter([
 				element: <SinglePost />,
 			},
 			{
-				path: "//change-profile-pic",
+				path: "/change-profile-pic",
 				element: <ChangeProfilePic />,
 			},
+			{
+				path:"/change-password",
+				element:<ChangePassword/>
+			}
 		],
 	},
 	{
