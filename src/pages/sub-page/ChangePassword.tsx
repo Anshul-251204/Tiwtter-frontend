@@ -3,10 +3,12 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
 	const [oldPassword, setOldPassword] = useState<string>("");
 	const [newPassword, setNewPassword] = useState<string>("");
+    const navigate = useNavigate()
 
 	const changePassword = async () => {
 		try {
@@ -17,6 +19,7 @@ const ChangePassword = () => {
 			);
 
 			toast.success(res.data.message);
+            navigate("/me")
 		} catch (error:any) {
             console.log(error);
             

@@ -13,8 +13,6 @@ function Profile() {
 
 	const user = useRecoilValue(userAtom);
 
-	console.log(user);
-
 	const redirectToEditPage = () => {
 		navigate("/profile-edit");
 	};
@@ -44,7 +42,7 @@ function Profile() {
 					<img
 						className=" absolute top-[55%] sm:top-[45%]  left-[5%] sm:h-[150px] h-[120px] sm:w-[150px] w-[120px] object-cover rounded-full "
 						src={
-							user.avatar.url
+							user?.avatar?.url
 								? user.avatar.url
 								: "https://images.unsplash.com/photo-1712135596173-2bb522bcfd88?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
 						}

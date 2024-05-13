@@ -17,66 +17,59 @@ const SinglePost: React.FC = () => {
 	const [refresh, setRefresh] = useState<boolean>(false);
 
 	useEffect(() => {
-		axios
-			.get(
-				`/api/v1/posts/${id}`
-			)
-			.then((data) => {
-				setPost(data?.data?.data);
-			});
-		axios
-			.get(
-				`/api/v1/comments/${id}`
-			)
-			.then((data) => {
-				setComments(data?.data?.data);
-			});
+		axios.get(`/api/v1/posts/${id}`).then((data) => {
+			setPost(data?.data?.data);
+		});
+		axios.get(`/api/v1/comments/${id}`).then((data) => {
+			setComments(data?.data?.data);
+		});
 	}, [refresh]);
 
-	const addCommentOnKeyPress = (
+	const addCommentOnKeyPress = async (
 		e: React.KeyboardEvent<HTMLInputElement>,
 		id: number,
 		content: string
 	) => {
 		if (e.key == "Enter") {
-			axios
-				.post(
+			try {
+				const res = await axios.post(
 					`/api/v1/comments/${id}`,
 					{ content },
 					{ withCredentials: true }
-				)
-				.then((data) => {
-					setRefresh((prev) => !prev);
-					toast.success(data.data.message);
-				})
-				.catch((err) => {
-					console.log(err);
-					toast.error(err.response.data.message);
-				});
+				);
+				setContent("");
+				setRefresh((prev) => !prev);
+				toast.success(res.data.message);
+			} catch (err: any) {
+				console.log(err);
+				toast.error(err.response.data.message);
+			}
 		}
 	};
 
-	const addCommentOnClick = (
+	const addCommentOnClick = async (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 		id: number,
 		content: string
 	) => {
-		e.preventDefault()
-		axios
-			.post(
+		e.preventDefault();
+
+		try {
+			const res = await axios.post(
 				`/api/v1/comments/${id}`,
 				{ content },
 				{ withCredentials: true }
-			)
-			.then((data) => {
-				setRefresh((prev) => !prev);
-				toast.success(data.data.message);
-			})
-			.catch((err) => {
-				console.log(err);
-				toast.error(err.response.data.message);
-			});
+			);
+			setContent("");
+			setRefresh((prev) => !prev);
+			toast.success(res.data.message);
+		} catch (err: any) {
+			console.log(err);
+			toast.error(err.response.data.message);
+		}
 	};
+
+	console.log(content);
 
 	return (
 		<div
@@ -92,6 +85,7 @@ const SinglePost: React.FC = () => {
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 						setContent(e.target.value)
 					}
+					value={content}
 					placeholder="Something...."
 					onKeyDown={(e) =>
 						addCommentOnKeyPress(e, Number(id), content)

@@ -73,7 +73,12 @@ export default function Setting() {
 				>
 					Change Profile
 				</button>
-				<button className="w-full hover:bg-secondary text-left p-4">
+				<button
+					onClick={() => {
+						navigate("/change-password");
+					}}
+					className="w-full hover:bg-secondary text-left p-4"
+				>
 					Change Password
 				</button>
 				<button
