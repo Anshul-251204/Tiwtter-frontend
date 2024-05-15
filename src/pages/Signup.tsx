@@ -22,7 +22,7 @@ export default function SignUp() {
 		e.preventDefault();
 		try {
 			const res = await axios.post(
-				"/api/v1/auth/signin",
+				"/api/v1/auth/signup",
 				user,
 				{
 					withCredentials: true,

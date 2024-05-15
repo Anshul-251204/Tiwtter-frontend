@@ -1,4 +1,5 @@
 import { CommentType } from "@/types/general-types";
+import { Link } from "react-router-dom";
 
 const Comments = ({ comment }: { comment: CommentType }) => {
 	return (
@@ -10,10 +11,12 @@ const Comments = ({ comment }: { comment: CommentType }) => {
 					alt=""
 				/>
 			</div>
-			<div className="w-[80%] h-[100px] flex flex-col justify-center pl-4">
+			<Link to={`/profile/${comment?.user?.username}`} className="w-[80%] h-[100px] flex flex-col justify-center pl-4">
 				<h1 className="text-lg font-semibold ">@ {comment?.user?.username}</h1>
 				<p>{comment?.content}</p>
-			</div>
+			</Link>
+
+			 
 		</div>
 	);
 };

@@ -17,6 +17,7 @@ import AddPostHome from "./pages/addPost.tsx";
 import SinglePost from "./pages/SinglePost.tsx";
 import ChangeProfilePic from "./pages/ChangeProfilePic.tsx";
 import ChangePassword from "./pages/sub-page/ChangePassword.tsx";
+import ForgetPassword from "./pages/sub-page/ForgetPassword.tsx";
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -61,6 +62,9 @@ export const router = createBrowserRouter([
 			{
 				path:"/change-password",
 				element:<ChangePassword/>
+			},{
+				path:"/forget-password",
+				element:<ForgetPassword/>
 			}
 		],
 	},

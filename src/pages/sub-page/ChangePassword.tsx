@@ -26,8 +26,13 @@ const ChangePassword = () => {
             toast.error(error.response.data.message)
         }
 	};
+
+	const redirectToForgetPasswordPage = ()=>{
+		navigate("/forget-password")
+	}
 	return (
-		<div className="w-full h-full p-10 ">
+		<div className="w-full h-full p-10 flex flex-col items-center ">
+			
 			<Input
 				className="w-full sm:w-[50%] my-4 "
 				placeholder="Old Password"
@@ -51,7 +56,11 @@ const ChangePassword = () => {
 			>
 				Change Password
 			</Button>
-			<Button variant={"outline"} className="w-full sm:w-[50%]  ">
+			<Button
+				onClick={redirectToForgetPasswordPage}
+				variant={"outline"}
+				className="w-full sm:w-[50%]  "
+			>
 				Forget Password
 			</Button>
 		</div>
