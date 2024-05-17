@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const ChangePassword = () => {
 	const [oldPassword, setOldPassword] = useState<string>("");
 	const [newPassword, setNewPassword] = useState<string>("");
-    const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const changePassword = async () => {
 		try {
@@ -19,20 +19,22 @@ const ChangePassword = () => {
 			);
 
 			toast.success(res.data.message);
-            navigate("/me")
-		} catch (error:any) {
-            console.log(error);
-            
-            toast.error(error.response.data.message)
-        }
+			navigate("/me");
+		} catch (error: any) {
+			console.log(error);
+
+			toast.error(error.response.data.message);
+		}
 	};
 
-	const redirectToForgetPasswordPage = ()=>{
-		navigate("/forget-password")
-	}
+	const redirectToForgetPasswordPage = () => {
+		axios
+			.post("/api/v1/auth/forgot-password")
+			.then((res) => console.log(res));
+		navigate("/forget-password");
+	};
 	return (
 		<div className="w-full h-full p-10 flex flex-col items-center ">
-			
 			<Input
 				className="w-full sm:w-[50%] my-4 "
 				placeholder="Old Password"
